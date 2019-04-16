@@ -27,14 +27,17 @@ class AppHeader extends React.Component<any, IAppHeaderState> {
                         data-toggle="collapse"
                         data-target="#navbarCollapse"
                         aria-controls="navbarCollapse"
-                        aria-expanded="false"
+                        aria-expanded={this.state.isMenuDrawerOpen ? 'true' : 'false'}
                         aria-label="Toggle navigation"
                         // tslint:disable-next-line: jsx-no-lambda
                         onClick={() => this._toggleMenuDrawer()}
                     >
                         <span className="navbar-toggler-icon" />
                     </button>
-                    <div className={this._getNavbarClasses()} id="navbarCollapse">
+                    <div
+                        className={this._getNavbarClasses()}
+                        id="navbarCollapse"
+                    >
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
                                 <a className="nav-link" href="#">
