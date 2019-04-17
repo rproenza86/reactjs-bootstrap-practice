@@ -1,5 +1,5 @@
 {
-    "name": "medium-react-material-ts-app",
+    "name": "pro-react-coder",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -19,7 +19,8 @@
         "build": "npm run build:css && react-scripts-ts build",
         "test": "react-scripts-ts test --env=jsdom",
         "eject": "react-scripts-ts eject",
-        "deploy": "npm run build && firebase deploy"
+        "deploy": "npm run build && firebase deploy",
+        "postbuild": "mv build dist"
     },
     "devDependencies": {
         "@types/jest": "^23.3.10",
