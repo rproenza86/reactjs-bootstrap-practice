@@ -17,7 +17,7 @@ class AppHeader extends React.Component<any, IAppHeaderState> {
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                     <a className="navbar-brand" href="#">
-                        Carousel
+                        ProReactCoder Carousel
                     </a>
                     <button
                         className={
@@ -34,10 +34,7 @@ class AppHeader extends React.Component<any, IAppHeaderState> {
                     >
                         <span className="navbar-toggler-icon" />
                     </button>
-                    <div
-                        className={this._getNavbarClasses()}
-                        id="navbarCollapse"
-                    >
+                    <div className={this._getNavbarClasses()} id="navbarCollapse">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
                                 <a className="nav-link" href="#">
