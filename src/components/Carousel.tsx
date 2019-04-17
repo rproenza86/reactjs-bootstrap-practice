@@ -1,16 +1,55 @@
 import * as React from 'react';
 
-class Carousel extends React.Component {
+enum ActiveItem {
+    Item1 = 1,
+    Item2,
+    Item3
+}
+
+enum ItemMovements {
+    Forward,
+    Back
+}
+
+interface ICarouselState {
+    itemActive: ActiveItem;
+}
+
+// tslint:disable: jsx-no-lambda
+
+class Carousel extends React.Component<any, ICarouselState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            itemActive: ActiveItem.Item1
+        } as ICarouselState;
+    }
+
     public render() {
         return (
             <div id="myCarousel" className="carousel slide" data-ride="carousel">
                 <ol className="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" className="active" />
-                    <li data-target="#myCarousel" data-slide-to="1" />
-                    <li data-target="#myCarousel" data-slide-to="2" />
+                    <li
+                        data-target="#myCarousel"
+                        data-slide-to="0"
+                        className={this._isItemActive(ActiveItem.Item1)}
+                        onClick={() => this._updateActiveItemFromIndicator(ActiveItem.Item1)}
+                    />
+                    <li
+                        data-target="#myCarousel"
+                        data-slide-to="1"
+                        className={this._isItemActive(ActiveItem.Item2)}
+                        onClick={() => this._updateActiveItemFromIndicator(ActiveItem.Item2)}
+                    />
+                    <li
+                        data-target="#myCarousel"
+                        data-slide-to="2"
+                        className={this._isItemActive(ActiveItem.Item3)}
+                        onClick={() => this._updateActiveItemFromIndicator(ActiveItem.Item3)}
+                    />
                 </ol>
                 <div className="carousel-inner">
-                    <div className="carousel-item active">
+                    <div className={'carousel-item ' + this._isItemActive(ActiveItem.Item1)}>
                         <svg
                             className="bd-placeholder-img"
                             width="100%"
@@ -38,7 +77,7 @@ class Carousel extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="carousel-item">
+                    <div className={'carousel-item ' + this._isItemActive(ActiveItem.Item2)}>
                         <svg
                             className="bd-placeholder-img"
                             width="100%"
@@ -66,7 +105,7 @@ class Carousel extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="carousel-item">
+                    <div className={'carousel-item ' + this._isItemActive(ActiveItem.Item3)}>
                         <svg
                             className="bd-placeholder-img"
                             width="100%"
@@ -100,6 +139,7 @@ class Carousel extends React.Component {
                     href="#myCarousel"
                     role="button"
                     data-slide="prev"
+                    onClick={() => this._updateNextActiveItem(ItemMovements.Back)}
                 >
                     <span className="carousel-control-prev-icon" aria-hidden="true" />
                     <span className="sr-only">Previous</span>
@@ -109,12 +149,42 @@ class Carousel extends React.Component {
                     href="#myCarousel"
                     role="button"
                     data-slide="next"
+                    onClick={() => this._updateNextActiveItem(ItemMovements.Forward)}
                 >
                     <span className="carousel-control-next-icon" aria-hidden="true" />
                     <span className="sr-only">Next</span>
                 </a>
             </div>
         );
+    }
+
+    private _updateNextActiveItem(movement: ItemMovements) {
+        const currentItem = this.state.itemActive;
+        const isMovingBack = movement === ItemMovements.Back;
+        const isMovingForward = movement === ItemMovements.Forward;
+        let nextItem = isMovingForward ? ActiveItem.Item1 : ActiveItem.Item3;
+
+        if (isMovingForward && currentItem !== ActiveItem.Item3) {
+            nextItem = ActiveItem[`Item${currentItem + 1}`];
+        }
+
+        if (isMovingBack && currentItem !== ActiveItem.Item1) {
+            nextItem = ActiveItem[`Item${currentItem - 1}`];
+        }
+
+        this.setState({
+            itemActive: nextItem
+        });
+    }
+
+    private _isItemActive(itemNumber: ActiveItem): string {
+        return this.state.itemActive === itemNumber ? 'active' : '';
+    }
+
+    private _updateActiveItemFromIndicator(itemNumber: ActiveItem) {
+        this.setState({
+            itemActive: itemNumber
+        });
     }
 }
 
