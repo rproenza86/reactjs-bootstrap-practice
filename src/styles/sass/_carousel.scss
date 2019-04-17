@@ -44,3 +44,21 @@
     line-height: 1;
     letter-spacing: -.05rem;
 }
+
+.carousel {
+    background-color: #777777
+}
+
+/* Animations */
+
+.carousel-item {
+    max-height: 0;
+    visibility: hidden;
+}
+
+.carousel-item.active {
+    max-height: 350px;
+    visibility: visible;
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
