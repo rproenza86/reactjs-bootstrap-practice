@@ -139,7 +139,10 @@ class Carousel extends React.Component<any, ICarouselState> {
                     href="#myCarousel"
                     role="button"
                     data-slide="prev"
-                    onClick={() => this._updateNextActiveItem(ItemMovements.Back)}
+                    onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+                        event.preventDefault();
+                        this._updateNextActiveItem(ItemMovements.Back);
+                    }}
                 >
                     <span className="carousel-control-prev-icon" aria-hidden="true" />
                     <span className="sr-only">Previous</span>
@@ -149,7 +152,10 @@ class Carousel extends React.Component<any, ICarouselState> {
                     href="#myCarousel"
                     role="button"
                     data-slide="next"
-                    onClick={() => this._updateNextActiveItem(ItemMovements.Forward)}
+                    onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+                        event.preventDefault();
+                        this._updateNextActiveItem(ItemMovements.Forward);
+                    }}
                 >
                     <span className="carousel-control-next-icon" aria-hidden="true" />
                     <span className="sr-only">Next</span>
